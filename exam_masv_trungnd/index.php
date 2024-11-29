@@ -28,23 +28,28 @@ if(isset($_SESSION['arr_nhan_vien'])){
             <td>Xóa</td>
         </tr>
         <?php
-        foreach($arr_nhan_vien as $id=>$row){
-        ?>
-        <tr>
-            <td><?php echo $row['id']?></td>
-            <td><?php echo $row['name']?></td>
-            <td><?php echo $row['dpartment']?></td>
-            <td><?php echo $row['position']?></td>
-            <td><?php echo $row['email']?></td>
-            <td><?php echo $row['dob']?></td>
-            <td>
-                <img src="uploads/<?php echo $row['image']?>" alt="" height="100">
-            </td>
-            <td><a href="show.php?id=<?=$row['id']?>">Show</a></td>
-            <td><a href="edit.php?id=<?=$row['id']?>">Sửa</a></td>
-            <td><a href="delete.php?id=<?=$row['id']?>">Xóa</a></td>
-        </tr>
-        <?php }?>
+        if(is_array($arr_nhan_vien)){
+            foreach($arr_nhan_vien as $id=>$row){
+                if (is_array($row)) {
+                ?>
+                <tr>
+                    <td><?php echo $row['id']?></td>
+                    <td><?php echo $row['name']?></td>
+                    <td><?php echo $row['dpartment']?></td>
+                    <td><?php echo $row['position']?></td>
+                    <td><?php echo $row['email']?></td>
+                    <td><?php echo $row['dob']?></td>
+                    <td>
+                        <img src="uploads/<?php echo $row['image']?>" alt="" height="100">
+                    </td>
+                    <td><a href="show.php?id=<?=$row['id']?>">Show</a></td>
+                    <td><a href="edit.php?id=<?=$row['id']?>">Sửa</a></td>
+                    <td><a href="delete.php?id=<?=$row['id']?>">Xóa</a></td>
+                </tr>
+                <?php 
+                }
+            }
+        }?>
     </table>
 
 </body>
