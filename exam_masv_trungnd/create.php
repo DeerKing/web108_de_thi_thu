@@ -28,10 +28,13 @@ if(isset($_POST['save'])){
     $file = $_FILES['image'];
     // print_r($file);die();
     $path = 'uploads/';
-    if(getimagesize($file['tmp_name'])){
-        $image_name = time().$file['name'];
-        $new_nhan_vien['image'] = $image_name;
-        move_uploaded_file($file['tmp_name'], $path.$image_name);
+    if($file['image'] != ''){
+        //Kiểm tra file upload có phải là hình ảnh hay không
+        if(getimagesize($file['tmp_name'])){
+            $image_name = time().$file['name'];
+            $new_nhan_vien['image'] = $image_name;
+            move_uploaded_file($file['tmp_name'], $path.$image_name);
+        }
     }
     //Lưu nhân viên mới vào session
     $_SESSION['arr_nhan_vien'][$id] = $new_nhan_vien;

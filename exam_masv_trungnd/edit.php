@@ -24,10 +24,14 @@ if(isset($_POST['edit'])){
     $file = $_FILES['image'];
     // print_r($file);die();
     $path = 'uploads/';
-    if(getimagesize($file['tmp_name'])){
-        $image_name = time().$file['name'];
-        $nhan_vien_sua['image'] = $image_name;
-        move_uploaded_file($file['tmp_name'], $path.$image_name);
+    //Kiểm tra xem file image có khác ''
+    if($file['image'] != ''){
+        //Kiểm tra file upload có phải là hình ảnh hay không
+        if(getimagesize($file['tmp_name'])){
+            $image_name = time().$file['name'];
+            $nhan_vien_sua['image'] = $image_name;
+            move_uploaded_file($file['tmp_name'], $path.$image_name);
+        }
     }
     //Lưu nhân viên mới vào session
     $_SESSION['arr_nhan_vien'][$id] = $nhan_vien_sua;
