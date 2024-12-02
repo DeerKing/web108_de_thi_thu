@@ -10,14 +10,14 @@ if(isset($_POST['edit'])){
     $email = htmlspecialchars($_POST['email']);
     $dob = $_POST['dob'];
     
-    $nhan_vien_sua = [
+    $nhan_vien_new = [
         'id' => $id,
         'name' => $name,
         'dpartment' => $dpartment,
         'position' => $position,
         'email' => $email,
         'dob' => $dob,
-        'image' => ''
+        'image' => $nhan_vien_sua['image']
     ];
     //Xử lý upload
     
@@ -29,12 +29,12 @@ if(isset($_POST['edit'])){
         //Kiểm tra file upload có phải là hình ảnh hay không
         if(getimagesize($file['tmp_name'])){
             $image_name = time().$file['name'];
-            $nhan_vien_sua['image'] = $image_name;
+            $nhan_vien_new['image'] = $image_name;
             move_uploaded_file($file['tmp_name'], $path.$image_name);
         }
     }
     //Lưu nhân viên mới vào session
-    $_SESSION['arr_nhan_vien'][$id] = $nhan_vien_sua;
+    $_SESSION['arr_nhan_vien'][$id] = $nhan_vien_new;
     header("Location: index.php");//Chuyển về trang index.php
 }
 ?>
